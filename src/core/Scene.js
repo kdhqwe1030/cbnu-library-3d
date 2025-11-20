@@ -1,6 +1,7 @@
 // src/core/Scene.js
 import * as THREE from "three";
 import { createFloor2 } from "../floors/floor2/index.js";
+import { createFloor3 } from "../floors/floor3/index.js";
 import { OrbitalCamera } from "./OrbitalCamera.js";
 import { Player } from "./Player.js";
 import { KeyboardInput } from "./KeyboardInput.js";
@@ -32,6 +33,9 @@ export class Scene extends THREE.Scene {
   async #loadFloors() {
     const floor2 = await createFloor2();
     this.add(floor2);
+    const floor3 = await createFloor3();
+    this.add(floor3);
+
     document.querySelector("#loading").style.display = "none";
   }
 
