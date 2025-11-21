@@ -5,6 +5,7 @@ import { createBackGlass1 } from "./walls/backGlass.js";
 import { createSideGlass1 } from "./walls/sideGlass.js";
 import { createFrontGlass1 } from "./walls/frontGlass.js";
 import { createGlassBorder1 } from "./walls/glassBorder.js"; // ⬅ 추가
+import { createCeiling3 } from "../floor3/ceiling/ceiling.js";
 
 export function createFloor1() {
   const floor1 = new THREE.Object3D();
@@ -54,5 +55,14 @@ export function createFloor1() {
     height1: wallHeight, // 1층 유리 높이 기준
   });
   floor1.add(border);
+
+  // 지붕 추가
+  const ceiling = createCeiling3({
+    floorWidth,
+    floorHeight,
+    floor3Height: wallHeight,
+  });
+  floor1.add(ceiling);
+
   return floor1;
 }
