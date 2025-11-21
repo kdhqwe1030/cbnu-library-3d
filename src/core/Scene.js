@@ -1,5 +1,6 @@
 // src/core/Scene.js
 import * as THREE from "three";
+import { createFloor1 } from "../floors/floor1/index.js";
 import { createFloor2 } from "../floors/floor2/index.js";
 import { createFloor3 } from "../floors/floor3/index.js";
 import { OrbitalCamera } from "./OrbitalCamera.js";
@@ -31,17 +32,37 @@ export class Scene extends THREE.Scene {
   }
 
   async #loadFloors() {
+    const floor1 = await createFloor1();
     const floor2 = await createFloor2();
+    const floor3 = createFloor3();
+
+    this.add(floor1);
     this.add(floor2);
-    const floor3 = await createFloor3();
     this.add(floor3);
 
     document.querySelector("#loading").style.display = "none";
   }
 
   #standardSet() {
-    this.background = new THREE.TextureLoader().load("/imgs/sky2.jpg");
-    // 원래 필드 세팅 코드 등…
+    this.background = new THREE.TextureLoader().load("imgs/sky2.jpg"); // 배경
+    const field_geo = new THREE.PlaneGeometry(1000, 1000);
+    var texture_field = new THREE.TextureLoader().load("imgs/grass-field.jpg");
+    texture_field;
+    texture_field.wrapS = THREE.RepeatWrapping; // 랩핑 모드 -> texture를 무한으로 반복
+    texture_field.wrapT = THREE.RsepeatWrapping;
+    texture_field.magFilter = THREE.NearestFilter; // 특정 텍스처 좌표와 가장 가까운 텍스쳐 요소의 값 리턴
+    texture_field.repeat.set(20, 20);
+    const field_mat = new THREE.MeshStandardMaterial({
+      map: texture_field,
+      normalMap: texture_field,
+      displacementMap: texture_field,
+      displacementScale: 1,
+    });
+    const field = new THREE.Mesh(field_geo, field_mat);
+    field.receiveShadow = true;
+    field.rotation.x = 1.5 * Math.PI;
+    field.position.y = -1;
+    this.add(field);
   }
 
   #setupControls() {
