@@ -1,2 +1,2 @@
 import { Scene } from "./core/Scene.js";
-new Scene();
+window.sceneInstance = new Scene();

@@ -119,4 +119,19 @@ export class Scene extends THREE.Scene {
 
     this.#prevTimestamp = timestamp;
   };
+
+  // 텔레포트 기능
+  teleportTo(floor) {
+    const floorHeights = {
+      1: 0,
+      2: 25,
+      3: 50,
+    };
+
+    const targetY = floorHeights[floor];
+    if (targetY !== undefined) {
+      this.#player.position.y = targetY;
+      console.log(`${floor}층으로 텔레포트했습니다. (y=${targetY})`);
+    }
+  }
 }
