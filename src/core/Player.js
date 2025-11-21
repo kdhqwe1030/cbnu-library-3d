@@ -38,10 +38,7 @@ export class Player extends THREE.Group {
         });
 
         model.position.set(0, 25, 0);
-        model.setRotationFromAxisAngle(
-          new THREE.Vector3(0, 1, 0),
-          Math.PI
-        );
+        model.setRotationFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI);
         this.#model = model;
         this.add(model);
 
@@ -109,10 +106,7 @@ export class Player extends THREE.Group {
     this.position.copy(nextPosition);
 
     if (this.#model)
-      this.#model.setRotationFromAxisAngle(
-        new THREE.Vector3(0, 1, 0),
-        angle
-      );
+      this.#model.setRotationFromAxisAngle(new THREE.Vector3(0, 1, 0), angle);
   };
 
   #setAction(name) {

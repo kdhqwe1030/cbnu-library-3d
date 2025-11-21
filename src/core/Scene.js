@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { createFloor1 } from "../floors/floor1/index.js";
 import { createFloor2 } from "../floors/floor2/index.js";
 import { createFloor3 } from "../floors/floor3/index.js";
+import { createFloor4 } from "../floors/floor4/index.js";
 import { OrbitalCamera } from "./OrbitalCamera.js";
 import { Player } from "./Player.js";
 import { KeyboardInput } from "./KeyboardInput.js";
@@ -32,13 +33,15 @@ export class Scene extends THREE.Scene {
   }
 
   async #loadFloors() {
-    const floor1 = await createFloor1();
+    const floor1 = createFloor1();
     const floor2 = await createFloor2();
     const floor3 = createFloor3();
+    const floor4 = createFloor4();
 
     this.add(floor1);
     this.add(floor2);
     this.add(floor3);
+    this.add(floor4);
 
     document.querySelector("#loading").style.display = "none";
   }
@@ -89,6 +92,9 @@ export class Scene extends THREE.Scene {
       path: "https://assets.codepen.io/829639/",
       onLoad: () => console.log("player loaded"),
     });
+
+    // 1층에서 시작 (모델 오프셋 25를 고려)
+    this.#player.position.y = -25;
 
     this.add(this.#player);
 
@@ -143,16 +149,19 @@ export class Scene extends THREE.Scene {
 
   // 텔레포트 기능
   teleportTo(floor) {
+    const MODEL_OFFSET = 25; // Player 내부 모델의 y 오프셋
     const floorHeights = {
       1: 0,
-      2: 25,
-      3: 50,
+      2: 31, // 25 + 4 * 1.5
+      3: 56, // 50 + 4 * 1.5
+      4: 81, // 75 + 4 * 1.5
     };
 
     const targetY = floorHeights[floor];
     if (targetY !== undefined) {
-      this.#player.position.y = targetY;
-      console.log(`${floor}층으로 텔레포트했습니다. (y=${targetY})`);
+      // 모델 오프셋을 빼서 실제 발이 바닥에 닿도록 조정
+      this.#player.position.y = targetY - MODEL_OFFSET;
+      console.log(`${floor}층으로 텔레포트했습니다. (바닥 y=${targetY}, 플레이어 y=${targetY - MODEL_OFFSET})`);
     }
   }
 }
