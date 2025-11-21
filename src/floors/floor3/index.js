@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { createFloor3Base } from "./floor/floorBase.js";
 import { createOuterWalls3 } from "./walls/outerWalls.js";
 import { createFrontGlass3 } from "./walls/frontGlass.js";
+import { createCeiling3 } from "./ceiling/ceiling.js";
 
 export function createFloor3() {
   const floor3 = new THREE.Object3D();
@@ -12,7 +13,7 @@ export function createFloor3() {
   const floorHeight = floorWidth / 3;
 
   const wallHeight = 25; // 한 층 높이 (2층 height2f와 동일)
-  const floor3Height = 50; // 월드 좌표에서 3층 위치 (원 코드: floor_3.position.set(0, 50, 0))
+  const floor3Height = 50 + 4 * 1.5; // 월드 좌표에서 3층 위치 (원 코드: floor_3.position.set(0, 50, 0))
 
   const distanceAdjust = 13; // 2층에서 계단/유리 기준으로 쓰던 값 재사용
 
@@ -37,6 +38,14 @@ export function createFloor3() {
     distanceAdjust,
   });
   floor3.add(frontGlass);
+
+  // 지붕 추가
+  const ceiling = createCeiling3({
+    floorWidth,
+    floorHeight,
+    floor3Height: wallHeight,
+  });
+  floor3.add(ceiling);
 
   // ===== 층 전체 높이 올리기 =====
   floor3.position.y = floor3Height;

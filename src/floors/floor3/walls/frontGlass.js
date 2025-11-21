@@ -76,7 +76,7 @@ export function createFrontGlass3({
 
   const miniwallGeo = new THREE.BoxGeometry(
     miniwallSize * 0.98,
-    wallHeight,
+    wallHeight * 0.99,
     pillarSize * 0.9
   );
 
