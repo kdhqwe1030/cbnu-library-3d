@@ -18,6 +18,7 @@ export async function createFloor2() {
   const floorSize = 24;
   const floorWidth = floorSize * 12;
   const floorHeight = floorWidth / 3;
+  const floor2Height = 25 + 4 * 1.5; // 월드 좌표에서 2층 위치 + 가로 기둥 벽 추가로 인한 조정값
 
   // 바닥 (간단 버전 – 나중에 floorBase 모듈로 교체 가능)
   const geo = new THREE.PlaneGeometry(floorWidth, floorHeight);
@@ -184,7 +185,7 @@ export async function createFloor2() {
   floor2.add(ceiling);
 
   // 층 전체 높이
-  floor2.position.y = height2f;
+  floor2.position.y = floor2Height;
 
   return floor2;
 }
