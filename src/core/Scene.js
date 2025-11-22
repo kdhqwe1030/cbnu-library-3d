@@ -163,7 +163,13 @@ export class Scene extends THREE.Scene {
     if (targetY !== undefined) {
       // 모델 오프셋을 빼서 실제 발이 바닥에 닿도록 조정
       this.#player.position.y = targetY - MODEL_OFFSET;
-      console.log(`${floor}층으로 텔레포트했습니다. (바닥 y=${targetY}, 플레이어 y=${targetY - MODEL_OFFSET})`);
+      this.#player.position.x = 0;
+      this.#player.position.z = 0;
+      console.log(
+        `${floor}층으로 텔레포트했습니다. (바닥 y=${targetY}, 플레이어 y=${
+          targetY - MODEL_OFFSET
+        })`
+      );
     }
   }
 }
