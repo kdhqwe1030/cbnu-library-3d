@@ -5,6 +5,7 @@ import { createDeskB } from "./desks/deskB.js";
 import { createDeskC } from "./desks/deskC.js";
 import { createDeskD } from "./desks/deskD.js";
 
+import { createPillars } from "./structure/pillars.js";
 import { createInsideWalls } from "./walls/insideWalls.js";
 import { createOuterWalls } from "./walls/outerWalls.js";
 import { createStudyRoomWalls } from "./walls/studyRoomWalls.js";
@@ -142,6 +143,18 @@ export async function createFloor2() {
     );
     floor2.add(tmp);
   }
+  // ===== 기둥 구조물 =====
+  const stairGlassSize = 8; // createPillars에서 쓰는 stare_glace_size 값
+
+  const pillars = createPillars({
+    floorSize,
+    floorWidth,
+    floorHeight,
+    height2f,
+    distanceAdjust,
+    stairGlassSize,
+  });
+  floor2.add(pillars);
 
   // ===== 벽/유리 모듈 조립 =====
   const insideWalls = createInsideWalls({
