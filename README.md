@@ -1,21 +1,56 @@
-# CBNU_library
+# CBNU Library 3D (Refactored 2025)
+
+**THREE.js 기반 실사형 도서관 3D 시뮬레이션 프로젝트**  
+충북대학교 중앙도서관 각 층(1F~4F)을 3D 공간으로 재구성한 프로젝트입니다.
+
+2023 버전에서 발생했던 구조적 문제와 메모리 사용량 과다 문제를  
+**2025년 전체 리팩터링을 통해 대규모로 개선**했습니다.
+
+🔗 **배포 URL:** https://cbnu-3d.netlify.app/  
 
 
+<br/>
 
-- 프로젝트 개요 : THREE.js를 활용하여 입체적 3D환경 구축 
+## 프로젝트 개요
 
+- **초기 개발기간:** 2023.09 ~ 2023.12  
+- **리팩터링 기간:** 2025.10 ~ 2025.11  
+- **목적:** THREE.js 기반 실사형 3D 도서관 구현  
+- **결과:**  
+  - 최적화된 렌더링 구조  
+  - 모듈화 기반 유지보수성 극대화  
+  - 실제 도서관을 기반으로 한 구조적 배치 및 인터랙션 제공
 
-- 개발기간 :  2023.09 ~ 2023.12
+<br/>
 
+<br/>
 
+# 2025 리팩터링 핵심 요약
 
-## Images
+### ✔ 전체 코드 구조 재정비
+- floor1~floor4 *단위 모듈화*
+- core(camera, controls, light, scene) 구조 도입
+- components(desks, sofa, walls 등) 세분화
+
+### ✔ THREE.js 구조 최적화
+- three.js-master 직접 포함 → **CDN 기반 importmap**으로 변경  
+  → 용량 대폭 감소  
+- GLTFLoader 병목 제거  
+
+### ✔ 캐릭터 조작 개선
+- WASD 이동  
+- Shift 달리기  
+- 방향키로 카메라 시점 회전  
+
+<br/>
+
+<br/>
+
+# Preview Images
 
 ### Overall
 
-
-![CBNU_library-THREE js](https://github.com/kdhqwe1030/THREE.js-Sturdy/assets/115572203/74c390b1-5d41-4af4-b9a2-3587872e85d2)
-
+<img src="https://github.com/user-attachments/assets/148cd662-7099-47d4-bf1d-1548126fdf99" width="1000" />
 
 ### Focus_2F
 
@@ -31,10 +66,7 @@
 
 ![2F_wall](https://github.com/kdhqwe1030/THREE.js-Sturdy/assets/115572203/40d86931-e64c-4d9c-bc55-3fd40b5fd53e)
 
-## Features
-- 캐릭터 이동 기능 구현
-- 3D모델을 활용한 도서관과 매우 흡사한 환경 
-- meterial의 디테일한 조작
+
 
 
 
