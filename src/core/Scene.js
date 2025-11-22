@@ -94,8 +94,8 @@ export class Scene extends THREE.Scene {
       onLoad: () => console.log("player loaded"),
     });
 
-    // 1층에서 시작 (모델 오프셋 25를 고려)
-    this.#player.position.y = -25;
+    // 2층에서 시작 (모델 오프셋 25를 고려)
+    this.#player.position.y = 6; // 2층 높이(31) - MODEL_OFFSET(25)
 
     this.add(this.#player);
 
