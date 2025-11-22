@@ -43,7 +43,8 @@ export class Scene extends THREE.Scene {
     this.add(floor3);
     this.add(floor4);
 
-    document.querySelector("#loading").style.display = "none";
+    document.querySelector("#loader").style.display = "none";
+    document.querySelector("#loading-background").style.display = "none";
   }
 
   #standardSet() {
@@ -157,11 +158,23 @@ export class Scene extends THREE.Scene {
       2: 31, // 25 + 4 * 1.5
       3: 56, // 50 + 4 * 1.5
       4: 81, // 75 + 4 * 1.5
+      5: 0,
     };
 
     const targetY = floorHeights[floor];
+
     if (targetY !== undefined) {
-      // 모델 오프셋을 빼서 실제 발이 바닥에 닿도록 조정
+      if (floor === 5) {
+        this.#player.position.set(0, targetY - MODEL_OFFSET, -320); // 특별한 위치로 텔레포트
+        this.#player.rotation.set(0, 0, 0); // 플레이어 회전 초기화
+
+        // 카메라를 정반대 방향(180도)으로 회전하고 약간 아래를 보도록 설정
+        this.#orbital.rotation.set(0, Math.PI, 0);
+
+        return;
+      }
+
+      // 일반 층으로 텔레포트
       this.#player.position.y = targetY - MODEL_OFFSET;
       this.#player.position.x = 0;
       this.#player.position.z = 0;
