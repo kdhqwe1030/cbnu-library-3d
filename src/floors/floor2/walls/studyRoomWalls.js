@@ -154,7 +154,7 @@ export function createStudyRoomWalls({
 
     const post2 = makeDoorPost();
     post2.position.set(
-      floorWidth / 2 + sturdyRoomDoorDistance * -1 + sturdyRoomDistance1 * i,
+      floorWidth / 2 + sturdyRoomDoorDistance - sturdyRoomDistance1 * i,
       0,
       floorHeight / 2 - insideWallWidth
     );
