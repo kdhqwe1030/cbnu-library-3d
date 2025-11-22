@@ -131,7 +131,9 @@ export class Scene extends THREE.Scene {
     // Reposition the player
     const { x: xPos, y: zPos } = this.#controls.position;
     const playerPosition = new THREE.Vector3(xPos, 0, zPos);
-    playerPosition.multiplyScalar(Player.timeDilation);
+    // Shift 키를 누르면 이동 속도 2배 증가
+    const speedMultiplier = this.#controls.position.isRunning ? 2 : 1;
+    playerPosition.multiplyScalar(Player.timeDilation * speedMultiplier);
     // This applies any orbital rotation to the new player position so that the "forward" direction (the A key) will always move the player "up" on the screen (and the same for left, down, and right).
     playerPosition.applyEuler(this.#orbital.rotation);
     this.#player.update(elapsedTime, playerPosition);
