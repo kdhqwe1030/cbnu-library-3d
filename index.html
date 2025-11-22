@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>homework3최종안</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #loading-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      #loader {
+        width: 50px;
+        aspect-ratio: 1.154;
+        position: relative;
+        background: conic-gradient(
+          from 120deg at 50% 64%,
+          #0000,
+          #25b09b 1deg 120deg,
+          #0000 121deg
+        );
+        animation: l27-0 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+      }
+      #loader:before,
+      #loader:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: inherit;
+        transform-origin: 50% 66%;
+        animation: l27-1 1.5s infinite;
+      }
+      #loader:after {
+        --s: -1;
+      }
+      @keyframes l27-0 {
+        0%,
+        30% {
+          transform: rotate(0);
+        }
+        70% {
+          transform: rotate(120deg);
+        }
+        70.01%,
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes l27-1 {
+        0% {
+          transform: rotate(calc(var(--s, 1) * 120deg)) translate(0);
+        }
+        30%,
+        70% {
+          transform: rotate(calc(var(--s, 1) * 120deg))
+            translate(calc(var(--s, 1) * -5px), 10px);
+        }
+        100% {
+          transform: rotate(calc(var(--s, 1) * 120deg)) translate(0);
+        }
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./three.js-master/build/three.module.js",
+          "three/addons/": "./three.js-master/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="loading-background">
+      <div id="loader"></div>
+    </div>
+    <div
+      id="teleport-controls"
+      style="position: absolute; top: 20px; left: 20px; z-index: 1000"
+    >
+      <button
+        onclick="window.sceneInstance.teleportTo(1)"
+        style="
+          padding: 10px 20px;
+          margin: 5px;
+          font-size: 16px;
+          cursor: pointer;
+          background-color: #4caf50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+        "
+      >
+        1층
+      </button>
+      <button
+        onclick="window.sceneInstance.teleportTo(2)"
+        style="
+          padding: 10px 20px;
+          margin: 5px;
+          font-size: 16px;
+          cursor: pointer;
+          background-color: #2196f3;
+          color: white;
+          border: none;
+          border-radius: 5px;
+        "
+      >
+        2층
+      </button>
+      <button
+        onclick="window.sceneInstance.teleportTo(3)"
+        style="
+          padding: 10px 20px;
+          margin: 5px;
+          font-size: 16px;
+          cursor: pointer;
+          background-color: #ff9800;
+          color: white;
+          border: none;
+          border-radius: 5px;
+        "
+      >
+        3층
+      </button>
+      <button
+        onclick="window.sceneInstance.teleportTo(4)"
+        style="
+          padding: 10px 20px;
+          margin: 5px;
+          font-size: 16px;
+          cursor: pointer;
+          background-color: #9c27b0;
+          color: white;
+          border: none;
+          border-radius: 5px;
+        "
+      >
+        4층
+      </button>
+    </div>
+    <div
+      id="teleport-controls2"
+      style="position: absolute; top: 70px; left: 20px; z-index: 1000"
+    >
+      <button
+        onclick="window.sceneInstance.teleportTo(5)"
+        style="
+          padding: 10px 20px;
+          margin: 5px;
+          font-size: 16px;
+          cursor: pointer;
+          background-color: #f44336;
+          color: white;
+          border: none;
+          border-radius: 5px;
+        "
+      >
+        전체 뷰
+      </button>
+    </div>
+    <div
+      id="info"
+      style="
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 10px 20px;
+        background-color: #333333;
+        color: #ffffff;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 1.6;
+      "
+    >
+      WASD로 캐릭터 이동<br />
+      Shift로 달리기<br />
+      방향키로 시점 회전 <br />
+      <span style="font-size: 10px"
+        >(조작이 안된다면 한/영 전환을 해주세요)</span
+      >
+      <br />
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
